@@ -1,125 +1,152 @@
-# Text Classification with PyTorch
+# 🧠 Text Classification using Transformers (PyTorch & TensorFlow)
 
-## Overview
+## 📌 Overview
 
-This project implements a text classification model using PyTorch to categorize messages into one of three classes:
+This project builds a **text classification system** to categorize real-world message data into one of three categories:
 
 * **Enquiry**
 * **Job**
 * **Spam**
 
-The model uses TF-IDF for text vectorization and a simple feedforward neural network for classification.
+It starts with a **TF-IDF + Neural Network** (PyTorch), then progresses to an advanced version using **Transformers (BERT)** with **both PyTorch and TensorFlow**. This covers foundational to modern NLP approaches in a semi-supervised learning setting.
 
 ---
 
-## Dataset
+## 📂 Dataset
 
-The dataset used is a CSV file containing the following columns:
+* **Source**: Real-world business message dataset (`foduu_contacts_message.csv`)
+* **Columns**:
 
-* `message`: Raw text input
-* `label`: (Manually annotated) class label - one of `enquiry`, `job`, or `spam`
-
-Only a subset of the data is labeled (\~105 samples), making this a semi-supervised learning use case.
-
----
-
-## Features
-
-* TF-IDF vectorization of text data
-* Simple neural network built with PyTorch
-* Label encoding and decoding
-* Single message prediction function
-* Accuracy evaluation
+  * `message`: Raw user message
+  * `label`: Manually annotated label (only \~105 out of \~1700 are labeled)
+* This is a **semi-supervised** use case (limited labeled data).
 
 ---
 
-## Requirements
+## 🚀 Features
 
-Install the required Python libraries:
+✅ Text vectorization using **TF-IDF**
+✅ Simple neural network with **PyTorch**
+✅ Transformer-based classifier using **BERT (HuggingFace Transformers)**
+✅ Implemented in both **PyTorch** and **TensorFlow**
+✅ Label encoding & decoding
+✅ Single message prediction interface
+✅ Model evaluation & accuracy report
+
+---
+
+## 🛠️ Requirements
 
 ```bash
-pip install torch scikit-learn pandas numpy
+pip install torch transformers tensorflow scikit-learn pandas numpy
 ```
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 text-classifier/
 ├── foduu_contacts_message.csv       # Input CSV with messages
-├── train.py                         # Script for training the model
-├── predict.py                       # Function to predict a label for a new message
-├── model.pth                        # Saved PyTorch model (optional)
-├── vectorizer.pkl                   # Saved TF-IDF vectorizer
-├── label_encoder.pkl                # Saved LabelEncoder
+├── train.py                         # PyTorch model training with TF-IDF
+├── predict.py                       # PyTorch TF-IDF-based prediction
+├── bert_pytorch.py                  # BERT-based model using PyTorch
+├── bert_tensorflow.py               # BERT-based model using TensorFlow
+├── model.pth                        # Saved PyTorch model
+├── bert_model.h5                    # Saved TensorFlow BERT model
+├── vectorizer.pkl                   # TF-IDF vectorizer (pickle)
+├── label_encoder.pkl                # Label encoder (pickle)
 └── README.md                        # Project documentation
 ```
 
 ---
 
-## How to Use
+## ⚙️ How to Use
 
-### 1. Train the Model
-
-Run the training script:
+### 1️⃣ Train Basic Model (TF-IDF + NN)
 
 ```bash
 python train.py
 ```
 
-This will:
+This:
 
-* Load and preprocess the data
-* Train a neural network
-* Save the trained model, label encoder, and TF-IDF vectorizer
+* Loads labeled data
+* Vectorizes using TF-IDF
+* Trains a feedforward NN
+* Saves model, vectorizer, and label encoder
 
-### 2. Predict a Single Message
-
-After training, import and use the `predict_message()` function:
+### 2️⃣ Predict with Basic Model
 
 ```python
 from predict import predict_message
-
-message = "Looking for digital marketing jobs."
-print(predict_message(message))  # Output: 'job'
+print(predict_message("Looking for freelance job"))  # ➡️ job
 ```
 
+### 3️⃣ Train BERT Model (PyTorch)
+
+```bash
+python bert_pytorch.py
+```
+
+Trains a Transformer-based classifier using HuggingFace and PyTorch.
+
+### 4️⃣ Train BERT Model (TensorFlow)
+
+```bash
+python bert_tensorflow.py
+```
+
+Runs the same logic in TensorFlow (using Keras Functional API + BERT).
+
 ---
 
-## Model Architecture
+## 🧠 Model Architectures
 
-* **Input Layer**: TF-IDF vector (500 features)
-* **Hidden Layer**: 128 neurons, ReLU activation
-* **Output Layer**: 3 neurons (softmax for class probabilities)
-* **Loss Function**: CrossEntropyLoss
+### TF-IDF + Feedforward NN
+
+* **Input**: TF-IDF (500 features)
+* **Hidden**: 128 neurons, ReLU
+* **Output**: 3 classes (softmax)
+* **Loss**: CrossEntropyLoss
 * **Optimizer**: Adam
-* **Epochs**: 20 (adjustable)
+* **Framework**: PyTorch
+
+### Transformer (BERT)
+
+* **Input**: Tokenized message
+* **Base**: `bert-base-uncased` (HuggingFace)
+* **Output**: Softmax layer (3 classes)
+* **Loss**: CrossEntropy
+* **Frameworks**: PyTorch & TensorFlow
 
 ---
 
-## Evaluation
+## 📊 Evaluation
 
-The model achieves \~85% accuracy on the small labeled subset.
-
----
-
-## Improvements
-
-* Add more labeled samples
-* Use more advanced NLP embeddings (e.g., BERT, FastText)
-* Add cross-validation and confusion matrix
-* Deploy using Flask or Streamlit
+* Accuracy (TF-IDF Model): \~85% (on limited 105 labeled samples)
+* BERT Model: Better contextual performance (subject to labeled data size)
 
 ---
 
-## Author
+## 💡 Future Improvements
+
+* Increase labeled data (active learning)
+* Fine-tune larger transformer models
+* Add Streamlit or Flask-based UI
+* Add confidence scores & explainability (e.g., SHAP)
+
+---
+
+## 👨‍💻 Author
 
 **Vivek Nagar**
-MCA Graduate | Aspiring Machine Learning Engineer
+*MCA Graduate | Aspiring Machine Learning Engineer*
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/vivek-nagar)
 
 ---
 
-## License
+## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
+
