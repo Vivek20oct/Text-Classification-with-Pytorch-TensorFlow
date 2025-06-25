@@ -14,7 +14,7 @@ It starts with a **TF-IDF + Neural Network** (PyTorch), then progresses to an ad
 
 ## 📂 Dataset
 
-* **Source**: Real-world business message dataset (`foduu_contacts_message.csv`)
+* **Source**: Real-world business message dataset (`contacts_message.csv`)
 * **Columns**:
 
   * `message`: Raw user message
