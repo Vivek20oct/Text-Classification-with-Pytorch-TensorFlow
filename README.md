@@ -47,7 +47,7 @@ pip install torch transformers tensorflow scikit-learn pandas numpy
 
 ```
 text-classifier/
-├── foduu_contacts_message.csv       # Input CSV with messages
+├── contacts_message.csv       # Input CSV with messages
 ├── train.py                         # PyTorch model training with TF-IDF
 ├── predict.py                       # PyTorch TF-IDF-based prediction
 ├── bert_pytorch.py                  # BERT-based model using PyTorch
